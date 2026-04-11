@@ -1,0 +1,1 @@
+I need a simple streamlit app that takes the resume as pdf and coverts it into a beautiful index.html in the project root with beautiful style sheet that mainly uses neomorphism, dark and light them options that can be easily hosted on github. 

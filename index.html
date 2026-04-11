@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Resume – Resume">
+  <title>Resume – Resume</title>
+  <style>
+:root {
+  /* Light theme */
+  --bg:              #e0e5ec;
+  --bg-card:         #e0e5ec;
+  --text-primary:    #2d3748;
+  --text-secondary:  #4a5568;
+  --text-muted:      #718096;
+  --accent:          #5b8dee;
+  --accent-light:    #7ba7f5;
+  --accent-dark:     #3a6fd8;
+  --shadow-dark:     #b8bec7;
+  --shadow-light:    #ffffff;
+  --neu-raise:       6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+  --neu-raise-sm:    3px 3px 8px var(--shadow-dark), -3px -3px 8px var(--shadow-light);
+  --neu-inset:       inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light);
+  --radius-card:     18px;
+  --radius-pill:     50px;
+  --font-main:       'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --transition:      all 0.3s ease;
+}
+
+[data-theme="dark"] {
+  --bg:              #1e2130;
+  --bg-card:         #1e2130;
+  --text-primary:    #e2e8f0;
+  --text-secondary:  #a0aec0;
+  --text-muted:      #718096;
+  --accent:          #7ba7f5;
+  --accent-light:    #9dc0ff;
+  --accent-dark:     #5b8dee;
+  --shadow-dark:     #141720;
+  --shadow-light:    #282d43;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+  transition: var(--transition);
+}
+
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* ---- Neomorphic card ---- */
+.neu-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--neu-raise);
+  padding: 1.75rem 2rem;
+  transition: var(--transition);
+}
+
+/* ---- Header / hero card ---- */
+.header-card {
+  text-align: center;
+  padding: 2.5rem 2rem 2rem;
+}
+
+.resume-name {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.resume-tagline {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 1.2rem;
+}
+
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact-item:hover { color: var(--accent); }
+.contact-item svg { flex-shrink: 0; }
+
+/* ---- Section title ---- */
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.6rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* ---- Experience ---- */
+.experience-entry {
+  background: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: var(--neu-raise-sm);
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1rem;
+  transition: var(--transition);
+}
+
+.experience-entry:last-child { margin-bottom: 0; }
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.2rem;
+}
+
+.job-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.job-dates {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.job-company {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bullets li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.75rem;
+  top: 0.2em;
+}
+
+/* ---- Education ---- */
+.education-entry {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--shadow-dark);
+}
+
+.education-entry:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+
+.degree { font-weight: 700; font-size: 1rem; color: var(--text-primary); }
+.institution { font-size: 0.9rem; color: var(--accent); font-weight: 600; }
+.edu-dates { font-size: 0.82rem; color: var(--text-muted); }
+.edu-details { font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.25rem; }
+
+/* ---- Skills pills ---- */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.neu-pill {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  box-shadow: var(--neu-inset);
+  transition: var(--transition);
+  cursor: default;
+}
+
+.neu-pill:hover {
+  color: var(--accent);
+}
+
+/* ---- Simple lists (certs, projects) ---- */
+.simple-list {
+  list-style: none;
+  padding: 0;
+}
+
+.simple-list li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.simple-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.6rem;
+  top: 0.35em;
+}
+
+/* ---- Raw / overflow sections ---- */
+.raw-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+/* ---- Theme toggle button ---- */
+.theme-toggle {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  box-shadow: var(--neu-raise);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 999;
+}
+
+.theme-toggle:hover { color: var(--accent); }
+.theme-toggle:active { box-shadow: var(--neu-inset); }
+
+/* ---- Summary text ---- */
+.summary-text {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+  .resume-name { font-size: 1.8rem; }
+  .page { padding: 1.5rem 1rem 3rem; }
+  .neu-card { padding: 1.25rem 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+  </button>
+
+  <div class="page">
+  <div class="neu-card header-card">
+    <h1 class="resume-name">Resume</h1>
+    <p class="resume-tagline">6+ years of experience as a Data Scientist | AI Engineer with an M.</p>
+    <div class="contact-row">
+    
+    </div>
+  </div>
+
+  <section class="neu-card">
+    <h2 class="section-title">Summary</h2>
+    <p class="summary-text">6+ years of experience as a Data Scientist | AI Engineer with an M.Tech in Embedded Systems from MNIT Jaipur. • 1. Nov 2022 – Present: Enterprise Minds India Pvt. Ltd., Data Scientist | AI Engineer 2. Jul 2020 – Oct 2022: iNeuron Intelligence, Senior Data Scientist 3. Jan 2019 – Oct 2019: Simplilearn, Consultant Versatile AI practitioner with a proven track record of architecting and delivering scalable, production-ready solutions • spanning Generative AI, Agentic Workflows, Computer Vision, multi-agent RAG systems, enterprise LLM evaluation pipelines, real-time video analytics, and NLP for enterprise clients across healthcare, finance, security, and regulatory</p>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Experience</h2>
+        <div class="experience-entry">
+      <div class="entry-header">
+        <span class="job-title">Data Scientist | AI Engineer Nov 2022 – Present  |  Bengaluru, India</span>
+        <span class="job-dates"></span>
+      </div>
+      <div class="job-company">Enterprise Minds India Pvt Ltd</div>
+      <ul class="bullets">
+      <li></li>
+      <li></li>
+    </ul>
+    </div>
+    <div class="experience-entry">
+      <div class="entry-header">
+        <span class="job-title">securing multiple high-value client engagements through innovative AI/ML/GenAI solutions</span>
+        <span class="job-dates">Sr. Consultant Jan 2019 – Oct 2019  |  Bengaluru, India</span>
+      </div>
+      <div class="job-company">Led the development of cutting-edge generative AI solutions, including multi-agent LangGraph workflows, RAG systems,</div>
+      <ul class="bullets">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    </div>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Education</h2>
+        <div class="education-entry">
+      <div class="degree">Master of Technology (Embedded Systems) 2016 – 2018  |  Jaipur</div>
+      <div class="institution"></div>
+      <div class="edu-dates"></div>
+      
+    </div>
+    <div class="education-entry">
+      <div class="degree">MALAVIYA NATIONAL INSTITUTE OF TECHNOLOGY,</div>
+      <div class="institution"></div>
+      <div class="edu-dates"></div>
+      
+    </div>
+    <div class="education-entry">
+      <div class="degree">Bachelor of Technology (ECE) 2009 – 2013  |  Gorakhpur, UP</div>
+      <div class="institution"></div>
+      <div class="edu-dates"></div>
+      
+    </div>
+    <div class="education-entry">
+      <div class="degree">MADAN MOHAN MALAVIYA UNIVERSITY OF TECHNOLOGY,</div>
+      <div class="institution">SUNNY BHAVEEN CHANDRA sunny.b.chandra17@gmail.com 2 / 2</div>
+      <div class="edu-dates"></div>
+      
+    </div>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+    <span class="neu-pill">Git</span>
+    <span class="neu-pill">GitHub</span>
+    <span class="neu-pill">GitLab</span>
+    <span class="neu-pill">Azure Repos</span>
+    <span class="neu-pill">AWS CodeCommit WindSurf</span>
+    <span class="neu-pill">Github Copilot</span>
+    <span class="neu-pill">Code Claude</span>
+    <span class="neu-pill">GitHub Copilot</span>
+  </div>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Projects</h2>
+    <ul class="simple-list">
+    <li>CXElevate - Internal RAG Agent System with Vertex AI Jan 2026 – Present</li>
+    <li>Enterprise Minds India Pvt. Ltd. | Client UKG</li>
+    <li>Tech: Vertex AI Agent Engine, Vertex AI SDK Evaluator, Memory Bank, Model Context Protocol (MCP), Google Agent</li>
+  </ul>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Sr. Data Scientist | Ai Engineer</h2>
+    <pre class="raw-text">sunny.b.chandra17 @gmail.com Jaipur linkedin.com/in/c17hawke/ github.com/c17hawke medium.com/@c17hawke youtube.com/c17hawke</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Compliance Domains.</h2>
+    <pre class="raw-text">Tech Lead (75% IC &amp; 25% Mgmt) with experience mentoring 8+ data scientists and engineers, driving cross-functional • collaboration from ideation and architectural design through to cloud deployment on AWS, Azure, and GCP.</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Generative Al Deep Learning</h2>
+    <pre class="raw-text">LangGraph | LangChain | OpenAI API | Groq API | Gemini  Artificial Neural Network | Transfer Learning | API | Prompt Autoencoders Engineering | RAG | CrewAI | MilvusDB | Azure Services</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Mlops</h2>
+    <pre class="raw-text">(Azure Content Safety | Azure AI Foundry | CosmosDB as DVC/ MLflow | Docker | Docker-compose | GitHub Actions VectorDB Azure OpenAI | Azure Document Intelligence,</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Python</h2>
+    <pre class="raw-text">Azure Al Search) | AWS Services (AWS Bedrock Guardrails | Scripting | Automation | Data Analysis | Poetry | Jupyter</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Aws</h2>
+    <pre class="raw-text">Notebooks | Bedrock) | Agentic AI Workflow | Fine-tunning LLM | Model Python Packaging | PyPI Publishing | Chainlit | Streamlit | Context Protocol (MCP) | Agentic Workflow Design | Google UV | Pytest Agent Development Kit (ADK) | Vertex AI | Vertex AI Evaluation SDK | OpenEvals | RAGAS | A2A protocol</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Computer Vision</h2>
+    <pre class="raw-text">Convolutional Neural Network | Image processing | Object</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Natural Language Processing</h2>
+    <pre class="raw-text">Classification | Object Detection | Object Segmentation | Transformers | Bert | GPT</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Apis</h2>
+    <pre class="raw-text">MySQL | MongoDB | CosmosDB FastAPI | Flask | gRPC OS</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Documentation</h2>
+    <pre class="raw-text">Linux (Ubuntu | Debian) | Windows | MacOS MkDocs | MkDocs-Materials</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Cloud</h2>
+    <pre class="raw-text">AWS | Azure | GCP</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Data Engineering</h2>
+    <pre class="raw-text">Apache Kafka | Apache Flink | Apache Druid | MinIO</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Observability Platforms</h2>
+    <pre class="raw-text">Arize Phoenix | LangSmith | MLFlow</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Development Kit (Adk)</h2>
+    <pre class="raw-text">Multi-agent system on Vertex AI with RAG architecture for internal knowledge retrieval • Dual memory management (short/ long-term) with context engine and dependency resolution • Enterprise data integration (SharePoint, Coveo) using MCP for extensible tool capabilities • Comprehensive observability stack with logging, monitoring, and tracing • Evaluation pipeline with scheduled metrics tracking using Vertex AI SDK • Metadata-driven search with reflect-rerank mechanisms for improved relevance • Implicit caching layer for performance optimization • Centralized agent registry and dynamic prompt management • Video Analytics AI Server with gRPC Aug 2025 – Dec 2025 Enterprise Minds India Pvt. Ltd. Tech: gRPC, Protocol Buffers, YOLO11, PyTorch, OpenCV, Docker, AsyncIO, CUDA Led end-to-end development of a video analytics server supporting 11+ computer vision use cases (object tracking, PPE • detection, intrusion detection, LPR, fire/smoke detection, crowd analytics) with sub-second latency and 98%+ accuracy Architected bidirectional gRPC streaming infrastructure with Protocol Buffers, enabling real-time frame processing with • 50MB message support, persistent connections, and automatic dead connection handling across multiple concurrent camera streams Achieved 75% computational reduction through frame stride optimization while maintaining accuracy, implementing • result caching, async/await architecture, and GPU acceleration (CUDA/CPU) with automatic device selection Designed scalable multi-camera architecture with per-camera tracker isolation, auto-reset mechanisms (4-hour intervals), • thread pool executors, and configurable workers to prevent memory leaks and cross-camera state conflicts KINECTIFY - GEN-AI BASED ENHANCEMENT OF REPORTING Nov 2023 – Nov 2024 Enterprise Minds India Pvt. Ltd. Tech: Azure AI Studio, Azure Machine Learning, LLMs, prompt-engineering, RAG, MLFlow, LangChain, OpenAI Designed and shipped a production RAG pipeline that automated SAR narrative generation, reducing processing time by •</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">40–70%</h2>
+    <pre class="raw-text">Prepared data for ingestion by leveraging client workflows and querying player data, transactions, KYC, SARs, and Alerts to • autofill case descriptions and SAR narratives Collaborated with domain experts (client) to develop ground truth data for LLM performance evaluation • Built initial pipeline testing candidate LLMs (GPT-3.5-turbo, Llama-2-7b, FLAN-T5-XL, Google-PALM2, GPT-4o, GPT-4o- •</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Mini) With Comprehensive Performance Documentation</h2>
+    <pre class="raw-text">Applied prompt-engineering techniques (Zero-shot, Few-shot, Chain-of-Thought) and logged results using MLFlow for • evaluation Implemented RAG techniques using CosmosDB as a vector database for document chunking, retrieval, and indexing to • enhance case description generation Researched and implemented evaluation metrics (ROUGE-L, BERTScore) to assess model performance •</pre>
+  </section>
+
+  <section class="neu-card">
+    <h2 class="section-title">Community Lectures</h2>
+    <pre class="raw-text">FastAPI for AI Application (Playlist for FastAPI for AI Apps)  Sep 2024 How to create well-tested Python packages  Sep 2022</pre>
+  </section>
+  </div>
+
+  <script>
+(function() {
+  var html = document.documentElement;
+  var btn  = document.getElementById('themeToggle');
+  var SUN  = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+  var MOON = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>`;
+
+  function applyTheme(t) {
+    html.setAttribute('data-theme', t);
+    btn.innerHTML = (t === 'dark') ? SUN : MOON;
+    btn.setAttribute('aria-label', (t === 'dark') ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+
+  var stored = localStorage.getItem('resume-theme') || 'light';
+  applyTheme(stored);
+
+  btn.addEventListener('click', function() {
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('resume-theme', next);
+    applyTheme(next);
+  });
+})();
+</script>
+</body>
+</html>
