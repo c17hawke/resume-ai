@@ -1,55 +1,108 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Resume – Resume">
   <title>Resume – Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">
   <style>
 :root {
-  /* Light theme */
-  --bg:              #e0e5ec;
-  --bg-card:         #e0e5ec;
-  --text-primary:    #2d3748;
-  --text-secondary:  #4a5568;
-  --text-muted:      #718096;
-  --accent:          #5b8dee;
-  --accent-light:    #7ba7f5;
-  --accent-dark:     #3a6fd8;
-  --shadow-dark:     #b8bec7;
+  color-scheme: light;
+
+  /* Warm cream palette */
+  --bg:              #ede4d5;
+  --bg-card:         rgba(255, 252, 246, 0.60);
+  --text-primary:    #2c2825;
+  --text-secondary:  #5a5248;
+  --text-muted:      #8a8078;
+  --accent:          #8b7cf6;
+  --accent-light:    #a99cf8;
+  --accent-dark:     #6d5de0;
+  --accent-warm:     #d4845a;
+
+  /* Neumorphic (minimal depth) */
+  --shadow-dark:     #d5ccc0;
   --shadow-light:    #ffffff;
-  --neu-raise:       6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
-  --neu-raise-sm:    3px 3px 8px var(--shadow-dark), -3px -3px 8px var(--shadow-light);
-  --neu-inset:       inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light);
-  --radius-card:     18px;
+  --neu-raise:       2px 2px 6px var(--shadow-dark), -2px -2px 6px var(--shadow-light);
+  --neu-raise-sm:    1px 1px 4px var(--shadow-dark), -1px -1px 4px var(--shadow-light);
+  --neu-inset:       inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+
+  /* Glass shadows */
+  --shadow-glass:    0 8px 32px rgba(180,100,40,0.10), 0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.70);
+  --shadow-glass-sm: 0 4px 16px rgba(180,100,40,0.07), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.55);
+
+  --radius-card:     14px;
   --radius-pill:     50px;
-  --font-main:       'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-main:       'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading:    'Inter Tight', 'Inter', sans-serif;
   --transition:      all 0.3s ease;
 }
 
-[data-theme="dark"] {
-  --bg:              #1e2130;
-  --bg-card:         #1e2130;
-  --text-primary:    #e2e8f0;
-  --text-secondary:  #a0aec0;
-  --text-muted:      #718096;
-  --accent:          #7ba7f5;
-  --accent-light:    #9dc0ff;
-  --accent-dark:     #5b8dee;
-  --shadow-dark:     #141720;
-  --shadow-light:    #282d43;
+.dark {
+  color-scheme: dark;
+
+  --bg:              #1b1a2e;
+  --bg-card:         rgba(22, 20, 40, 0.55);
+  --text-primary:    #e4e0f0;
+  --text-secondary:  #c4bde0;
+  --text-muted:      #9890b8;
+  --accent:          #a78bfa;
+  --accent-light:    #c4a8fc;
+  --accent-dark:     #8b6ff0;
+  --accent-warm:     #5eadb0;
+
+  --shadow-dark:     #111024;
+  --shadow-light:    #242340;
+  --neu-raise:       2px 2px 5px #13162260, -2px -2px 5px #20243f;
+  --neu-raise-sm:    1px 1px 3px #13162250, -1px -1px 3px #1e2440;
+  --neu-inset:       inset 2px 2px 4px #13162260, inset -2px -2px 4px #20243f;
+
+  --shadow-glass:    0 8px 32px rgba(80,50,160,0.18), 0 2px 8px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10);
+  --shadow-glass-sm: 0 4px 16px rgba(80,50,160,0.14), 0 1px 4px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.07);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: var(--bg);
+  background-color: var(--bg);
+  /* Gradient blobs — visible through glass cards */
+  background-image:
+    radial-gradient(ellipse 80% 70% at 95% -5%,
+      rgba(225,135,65,0.42) 0%,
+      rgba(215,110,80,0.28) 40%,
+      transparent 65%),
+    radial-gradient(ellipse 70% 60% at -5% 105%,
+      rgba(225,135,65,0.36) 0%,
+      rgba(200,90,90,0.18) 40%,
+      transparent 60%),
+    radial-gradient(ellipse 40% 35% at 50% 50%,
+      rgba(180,150,220,0.08) 0%,
+      transparent 100%);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-main);
   font-size: 15px;
   line-height: 1.7;
   min-height: 100vh;
-  transition: var(--transition);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(ellipse 80% 70% at 95% -5%,
+      rgba(140,90,220,0.30) 0%,
+      rgba(100,70,200,0.20) 40%,
+      transparent 65%),
+    radial-gradient(ellipse 70% 60% at -5% 105%,
+      rgba(70,130,210,0.25) 0%,
+      rgba(60,100,190,0.15) 40%,
+      transparent 60%),
+    radial-gradient(ellipse 45% 40% at 55% 45%,
+      rgba(160,100,240,0.10) 0%,
+      transparent 100%);
 }
 
 .page {
@@ -60,13 +113,24 @@ body {
   gap: 1.5rem;
 }
 
-/* ---- Neomorphic card ---- */
+/* ---- Glass card ---- */
 .neu-card {
   background: var(--bg-card);
+  backdrop-filter: blur(28px) saturate(1.7);
+  -webkit-backdrop-filter: blur(28px) saturate(1.7);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-top-color: rgba(255, 255, 255, 0.88);
+  border-left-color: rgba(255, 255, 255, 0.72);
   border-radius: var(--radius-card);
-  box-shadow: var(--neu-raise);
+  box-shadow: var(--shadow-glass);
   padding: 1.75rem 2rem;
   transition: var(--transition);
+}
+
+.dark .neu-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(255, 255, 255, 0.16);
+  border-left-color: rgba(255, 255, 255, 0.12);
 }
 
 /* ---- Header / hero card ---- */
@@ -77,10 +141,21 @@ body {
 
 .resume-name {
   font-size: 2.4rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
+  font-weight: 800;
+  font-family: var(--font-heading);
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #8b7cf6 0%, #b07fc5 50%, #d4845a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 0.4rem;
+}
+
+.dark .resume-name {
+  background: linear-gradient(135deg, #a78bfa 0%, #c49fd4 50%, #5eadb0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .resume-tagline {
@@ -135,12 +210,22 @@ body {
 
 /* ---- Experience ---- */
 .experience-entry {
-  background: var(--bg-card);
-  border-radius: 12px;
-  box-shadow: var(--neu-raise-sm);
+  background: rgba(255, 252, 246, 0.38);
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.50);
+  border-top-color: rgba(255, 255, 255, 0.80);
+  border-radius: 10px;
+  box-shadow: var(--shadow-glass-sm);
   padding: 1.2rem 1.4rem;
   margin-bottom: 1rem;
   transition: var(--transition);
+}
+
+.dark .experience-entry {
+  background: rgba(22, 20, 40, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-top-color: rgba(255, 255, 255, 0.14);
 }
 
 .experience-entry:last-child { margin-bottom: 0; }
@@ -201,7 +286,11 @@ body {
 .education-entry {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--shadow-dark);
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+
+.dark .education-entry {
+  border-bottom-color: rgba(255,255,255,0.08);
 }
 
 .education-entry:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
@@ -225,14 +314,27 @@ body {
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--text-secondary);
-  background: var(--bg-card);
-  box-shadow: var(--neu-inset);
+  background: rgba(255, 252, 246, 0.52);
+  backdrop-filter: blur(20px) saturate(1.7);
+  -webkit-backdrop-filter: blur(20px) saturate(1.7);
+  border: 1px solid rgba(255, 255, 255, 0.50);
+  border-top-color: rgba(255, 255, 255, 0.82);
+  border-left-color: rgba(255, 255, 255, 0.65);
+  box-shadow: var(--shadow-glass-sm);
   transition: var(--transition);
   cursor: default;
 }
 
+.dark .neu-pill {
+  background: rgba(22, 20, 40, 0.48);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-top-color: rgba(255, 255, 255, 0.14);
+  border-left-color: rgba(255, 255, 255, 0.10);
+}
+
 .neu-pill:hover {
   color: var(--accent);
+  border-color: rgba(139, 124, 246, 0.40);
 }
 
 /* ---- Simple lists (certs, projects) ---- */
@@ -274,16 +376,25 @@ body {
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-top-color: rgba(255, 255, 255, 0.88);
   cursor: pointer;
-  background: var(--bg-card);
+  background: rgba(255, 252, 246, 0.60);
+  backdrop-filter: blur(20px) saturate(1.7);
+  -webkit-backdrop-filter: blur(20px) saturate(1.7);
   color: var(--text-secondary);
-  box-shadow: var(--neu-raise);
+  box-shadow: var(--shadow-glass-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: var(--transition);
   z-index: 999;
+}
+
+.dark .theme-toggle {
+  background: rgba(22, 20, 40, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(255, 255, 255, 0.16);
 }
 
 .theme-toggle:hover { color: var(--accent); }
@@ -499,16 +610,24 @@ body {
   var MOON = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>`;
 
   function applyTheme(t) {
-    html.setAttribute('data-theme', t);
+    if (t === 'dark') {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
     btn.innerHTML = (t === 'dark') ? SUN : MOON;
     btn.setAttribute('aria-label', (t === 'dark') ? 'Switch to light mode' : 'Switch to dark mode');
   }
 
-  var stored = localStorage.getItem('resume-theme') || 'light';
+  // Respect saved preference or system preference
+  var stored = localStorage.getItem('resume-theme');
+  if (!stored) {
+    stored = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
   applyTheme(stored);
 
   btn.addEventListener('click', function() {
-    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    var next = html.classList.contains('dark') ? 'light' : 'dark';
     localStorage.setItem('resume-theme', next);
     applyTheme(next);
   });
